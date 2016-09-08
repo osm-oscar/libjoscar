@@ -27,11 +27,10 @@ class Base<T_NATIVE_COMMUNICATOR extends de.funroll_loops.oscar.nc.BaseInterface
 		}
 	}
 	
-	protected boolean close() {
+	protected void close() {
 		if (ptr() >= 0) {
-			return nc().destroy( ptr() );
+			nc().destroy( ptr() );
 		}
-		return true;
 	}
 
 	protected void throw_on_invalid() {

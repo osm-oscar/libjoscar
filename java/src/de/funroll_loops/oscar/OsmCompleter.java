@@ -9,7 +9,7 @@ public class OsmCompleter extends Base<de.funroll_loops.oscar.nc.OsmCompleter> {
 		cnc().setFilePrefix(ptr(), filename);
 	}
 
-	public boolean energize() {
+	public void energize() {
 		return cnc().energize( ptr() );
 	}
 	

@@ -20,7 +20,7 @@ JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_OsmItem_create
  * Method:    destroy
  * Signature: (I)Z
  */
-JNIEXPORT jboolean JNICALL Java_de_funroll_1loops_oscar_nc_OsmItem_destroy
+JNIEXPORT void JNICALL Java_de_funroll_1loops_oscar_nc_OsmItem_destroy
   (JNIEnv *, jobject, jint);
 
 /*

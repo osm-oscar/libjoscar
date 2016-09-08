@@ -3,7 +3,7 @@ package de.funroll_loops.oscar.nc;
 public class OsmItem extends Base implements BaseInterface {
 
 	public native int create();
-	public native boolean destroy(int ptr);
+	public native void destroy(int ptr);
 
 	public native int id(int ptr);
 	
