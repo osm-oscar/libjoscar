@@ -18,7 +18,7 @@ JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_OsmKeyValueObjectStore_cr
 /*
  * Class:     de_funroll_loops_oscar_nc_OsmKeyValueObjectStore
  * Method:    destroy
- * Signature: (I)Z
+ * Signature: (I)V
  */
 JNIEXPORT void JNICALL Java_de_funroll_1loops_oscar_nc_OsmKeyValueObjectStore_destroy
   (JNIEnv *, jobject, jint);

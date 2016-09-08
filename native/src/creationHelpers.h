@@ -7,6 +7,7 @@ namespace libjoscar {
 
 int createStore(const liboscar::Static::OsmKeyValueObjectStore & v);
 int createOsmItem(const liboscar::Static::OsmKeyValueObjectStore::Item & v);
+int createGeoHierarchySubSet(const sserialize::Static::spatial::GeoHierarchy::SubSet & v);
 
 }
 

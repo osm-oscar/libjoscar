@@ -16,9 +16,9 @@ public:
 	ObjectStore() {}
 	~ObjectStore();
 	bool count(int32_t id) const;
-	int32_t insert(T * ptr) const;
-	T * get(int32_t id) const;
-	void destroy(int32_t id) const;
+	int32_t insert(T* ptr);
+	T * get(int32_t id);
+	void destroy(int32_t id);
 private:
 	std::vector<value_type*> m_d;
 	std::stack<std::size_t> m_fl; //free list
@@ -35,12 +35,12 @@ ObjectStore<T>::~ObjectStore() {
 template<typename T>
 bool
 ObjectStore<T>::count(int32_t id) const {
-	return id >= 0 && m_d.size() > id && m_d[id];
+	return id >= 0 && m_d.size() > (std::size_t) id && m_d[id];
 }
 
 template<typename T>
 int32_t
-ObjectStore<T>::insert(T * ptr) const {
+ObjectStore<T>::insert(T * ptr) {
 	if (m_fl.size()) {
 		int32_t id = m_fl.top();
 		m_fl.pop();
@@ -56,7 +56,7 @@ ObjectStore<T>::insert(T * ptr) const {
 
 template<typename T>
 T *
-ObjectStore<T>::get(int32_t id) const {
+ObjectStore<T>::get(int32_t id) {
 	T * t = m_d.at(id);
 	if (!t) {
 		throw std::runtime_error("Nullpointer exception");
@@ -66,7 +66,7 @@ ObjectStore<T>::get(int32_t id) const {
 
 template<typename T>
 void
-ObjectStore<T>::destroy(int32_t id) const {
+ObjectStore<T>::destroy(int32_t id) {
 	if (count(id)) {
 		delete get(id);
 		m_d[id] = 0;

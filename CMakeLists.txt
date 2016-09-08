@@ -4,6 +4,16 @@ project(joscar)
 find_package(JNI REQUIRED)
 # find_package(LIBRT REQUIRED)
 
+set(MY_C_FLAGS "${CMAKE_C_FLAGS} -frounding-math -std=c99 -Wall -Wextra -Wno-unknown-pragmas -Wstrict-overflow=4")
+set(MY_CXX_FLAGS "${CMAKE_CXX_FLAGS} -frounding-math -std=gnu++0x -Wall -Wextra -Wno-unknown-pragmas -Wstrict-overflow=4")
+
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${MY_C_FLAGS}")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${MY_CXX_FLAGS}")
+set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} ${DEBUG_FLAGS}")
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} ${DEBUG_FLAGS}")
+set(CMAKE_C_FLAGS_RELWITHDEBINFO "${CMAKE_C_FLAGS_RELWITHDEBINFO} ${DEBUG_FLAGS}")
+set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "${CMAKE_CXX_FLAGS_RELWITHDEBINFO} ${DEBUG_FLAGS}")
+
 include_directories(
 	${CMAKE_SOURCE_DIR}
 	${CMAKE_CURRENT_BINARY_DIR}
@@ -14,10 +24,13 @@ include_directories(
 )
 
 set(JOSCAR_SOURCES_CPP
-	de_funroll_loops_oscar_nc_OsmCompleter.cpp
-	de_funroll_loops_oscar_nc_OsmKeyValueObjectStore.cpp
-	de_funroll_loops_oscar_nc_OsmItem.cpp
-	de_funroll_loops_oscar_exceptionhelpers.cpp
+	native/src/de_funroll_loops_oscar_nc_GeoHierarchySubSet.cpp
+	native/src/de_funroll_loops_oscar_nc_Helpers.cpp
+	native/src/de_funroll_loops_oscar_nc_OsmCompleter.cpp
+	native/src/de_funroll_loops_oscar_nc_OsmItem.cpp
+	native/src/de_funroll_loops_oscar_nc_OsmKeyValueObjectStore.cpp
+	native/src/exceptionhelpers.cpp
+	native/src/helpers.cpp
 )
 
 SET(JOSCAR_LINK_LIBS

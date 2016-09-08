@@ -18,9 +18,9 @@ JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_OsmCompleter_create
 /*
  * Class:     de_funroll_loops_oscar_nc_OsmCompleter
  * Method:    destroy
- * Signature: (I)Z
+ * Signature: (I)V
  */
-JNIEXPORT jboolean JNICALL Java_de_funroll_1loops_oscar_nc_OsmCompleter_destroy
+JNIEXPORT void JNICALL Java_de_funroll_1loops_oscar_nc_OsmCompleter_destroy
   (JNIEnv *, jobject, jint);
 
 /*
@@ -34,9 +34,9 @@ JNIEXPORT void JNICALL Java_de_funroll_1loops_oscar_nc_OsmCompleter_setFilePrefi
 /*
  * Class:     de_funroll_loops_oscar_nc_OsmCompleter
  * Method:    energize
- * Signature: (I)Z
+ * Signature: (I)V
  */
-JNIEXPORT jboolean JNICALL Java_de_funroll_1loops_oscar_nc_OsmCompleter_energize
+JNIEXPORT void JNICALL Java_de_funroll_1loops_oscar_nc_OsmCompleter_energize
   (JNIEnv *, jobject, jint);
 
 /*
@@ -46,6 +46,14 @@ JNIEXPORT jboolean JNICALL Java_de_funroll_1loops_oscar_nc_OsmCompleter_energize
  */
 JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_OsmCompleter_store
   (JNIEnv *, jobject, jint);
+
+/*
+ * Class:     de_funroll_loops_oscar_nc_OsmCompleter
+ * Method:    clusteredComplete
+ * Signature: (ILjava/lang/String;Z)I
+ */
+JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_OsmCompleter_clusteredComplete
+  (JNIEnv *, jobject, jint, jstring, jboolean);
 
 #ifdef __cplusplus
 }

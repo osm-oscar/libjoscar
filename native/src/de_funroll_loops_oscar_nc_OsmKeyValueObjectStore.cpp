@@ -58,10 +58,11 @@ JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_OsmKeyValueObjectStore_si
   (JNIEnv * env, jobject, jint id)
 {
 	try {
-		objStore.get(id)->size();
+		return objStore.get(id)->size();
 	}
 	catch (...) {
 		libjoscar::swallow_cpp_exception_and_throw_java(env);
+		return -1;
 	}
 }
 
@@ -78,5 +79,6 @@ JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_OsmKeyValueObjectStore_at
 	}
 	catch (...) {
 		libjoscar::swallow_cpp_exception_and_throw_java(env);
+		return -1;
 	}
 }

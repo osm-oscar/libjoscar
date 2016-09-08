@@ -10,3 +10,4 @@ javah -classpath "${BASE_PATH}/java/build" de.funroll_loops.oscar.nc.Helpers
 javah -classpath "${BASE_PATH}/java/build" de.funroll_loops.oscar.nc.OsmItem
 javah -classpath "${BASE_PATH}/java/build" de.funroll_loops.oscar.nc.OsmCompleter
 javah -classpath "${BASE_PATH}/java/build" de.funroll_loops.oscar.nc.OsmKeyValueObjectStore
+javah -classpath "${BASE_PATH}/java/build" de.funroll_loops.oscar.nc.GeoHierarchySubSet

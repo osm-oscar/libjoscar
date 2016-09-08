@@ -34,15 +34,14 @@ JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_OsmCompleter_create
  * Method:    destroy
  * Signature: (I)Z
  */
-JNIEXPORT jboolean JNICALL Java_de_funroll_1loops_oscar_nc_OsmCompleter_destroy
-  (JNIEnv * env, jobject obj, jint id)
+JNIEXPORT void JNICALL Java_de_funroll_1loops_oscar_nc_OsmCompleter_destroy
+  (JNIEnv * env, jobject, jint id)
 {
 	try {
 		objStore.destroy(id);
 	}
 	catch (...) {
 		libjoscar::swallow_cpp_exception_and_throw_java(env);
-		return false;
 	}
 }
 
@@ -55,11 +54,10 @@ JNIEXPORT void JNICALL Java_de_funroll_1loops_oscar_nc_OsmCompleter_setFilePrefi
   (JNIEnv * env, jobject, jint id, jstring path)
 {
 	try {
-		return objStore.get(id)->setAllFilesFromPrefix();
+		objStore.get(id)->setAllFilesFromPrefix( libjoscar::toString(env, path) );
 	}
 	catch (...) {
 		libjoscar::swallow_cpp_exception_and_throw_java(env);
-		return false;
 	}
 }
 
@@ -92,5 +90,26 @@ JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_OsmCompleter_store
 	}
 	catch (...) {
 		libjoscar::swallow_cpp_exception_and_throw_java(env);
+		return -1;
 	}
 }
+
+/*
+ * Class:     de_funroll_loops_oscar_nc_OsmCompleter
+ * Method:    clusteredComplete
+ * Signature: (Ljava/lang/String;Z)I
+ */
+JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_OsmCompleter_clusteredComplete
+  (JNIEnv * env, jobject, jint id, jstring qjstr, jboolean treedCQR)
+{
+	try {
+		std::string qstr( libjoscar::toString(env, qjstr) );
+		auto tmp = objStore.get(id)->clusteredComplete(qstr, 0xFFFFFFFF, treedCQR, 1); 
+		return libjoscar::createGeoHierarchySubSet(tmp);
+	}
+	catch (...) {
+		libjoscar::swallow_cpp_exception_and_throw_java(env);
+		return -1;
+	}
+}
+  

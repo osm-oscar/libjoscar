@@ -10,7 +10,7 @@
  * Signature: (Ljava/lang/String;)V
  */
 JNIEXPORT void JNICALL Java_de_funroll_1loops_oscar_nc_Helpers_setSlowTempFilePrefix
-  (JNIEnv * env, jclass cls, jstring path)
+  (JNIEnv * env, jclass, jstring path)
 {
 	try {
 		sserialize::UByteArrayAdapter::setTempFilePrefix(libjoscar::toString(env, path));
@@ -26,7 +26,7 @@ JNIEXPORT void JNICALL Java_de_funroll_1loops_oscar_nc_Helpers_setSlowTempFilePr
  * Signature: (Ljava/lang/String;)V
  */
 JNIEXPORT void JNICALL Java_de_funroll_1loops_oscar_nc_Helpers_setFastTempFilePrefix
-  (JNIEnv * env, jclass cls, jstring path)
+  (JNIEnv * env, jclass, jstring path)
 {
 	try {
 		sserialize::UByteArrayAdapter::setFastTempFilePrefix(libjoscar::toString(env, path));

@@ -10,4 +10,6 @@ public class OsmCompleter extends Base implements BaseInterface {
 	public native void energize(int ptr);
 	
 	public native int store(int ptr);
+	
+	public native int clusteredComplete(int ptr, String qstr, boolean treedCQR);
 }
