@@ -33,6 +33,14 @@ JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_GeoHierarchySubSet_cellCo
 
 /*
  * Class:     de_funroll_loops_oscar_nc_GeoHierarchySubSet
+ * Method:    itemCount
+ * Signature: (I)I
+ */
+JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_GeoHierarchySubSet_itemCount
+  (JNIEnv *, jobject, jint);
+
+/*
+ * Class:     de_funroll_loops_oscar_nc_GeoHierarchySubSet
  * Method:    topK
  * Signature: (II)[I
  */

@@ -10,6 +10,10 @@ public class GeoHierarchySubSet extends Base<de.funroll_loops.oscar.nc.GeoHierar
 		return cnc().cellCount( ptr() );
 	}
 	
+	public int itemCount() {
+		return cnc().itemCount( ptr() );
+	}
+	
 	public int[] topK(int count) {
 		return cnc().topK(ptr(), count);
 	}
