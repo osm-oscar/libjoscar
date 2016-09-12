@@ -6,6 +6,8 @@
 #include <limits>
 #include <stdexcept>
 
+#include <sserialize/utility/exceptions.h>
+
 namespace libjoscar {
 
 template<typename T>
@@ -59,7 +61,7 @@ T *
 ObjectStore<T>::get(int32_t id) {
 	T * t = m_d.at(id);
 	if (!t) {
-		throw std::runtime_error("Nullpointer exception");
+		throw sserialize::InvalidReferenceException("ObjectStore::get(id) with id=" + std::to_string(id));
 	}
 	return t;
 }
