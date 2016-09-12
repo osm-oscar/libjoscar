@@ -6,11 +6,11 @@ public class OsmKeyValueObjectStore extends Base<de.funroll_loops.oscar.nc.OsmKe
 	}
 
 	public OsmKeyValueObjectStore(int ptr) {
-		super(ptr);
+		super(new de.funroll_loops.oscar.nc.OsmKeyValueObjectStore(), ptr);
 	}
 	
 	public int size() {
-		cnc().size( ptr() );
+		return cnc().size( ptr() );
 	}
 	
 	public OsmItem at(int pos) {
