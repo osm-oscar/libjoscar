@@ -25,6 +25,14 @@ public class OsmItem extends Base<de.funroll_loops.oscar.nc.OsmItem> {
 		return cnc().size( ptr() );
 	}
 
+	public int keyId(int pos) {
+		return cnc().keyId(ptr(), pos);
+	}
+	
+	public int valueId(int pos) {
+		return cnc().valueId(ptr(), pos);
+	}
+	
 	public String key(int pos) {
 		return cnc().key(ptr(), pos);
 	}

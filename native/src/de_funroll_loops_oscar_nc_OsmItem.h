@@ -57,6 +57,22 @@ JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_OsmItem_size
 
 /*
  * Class:     de_funroll_loops_oscar_nc_OsmItem
+ * Method:    keyId
+ * Signature: (II)I
+ */
+JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_OsmItem_keyId
+  (JNIEnv *, jobject, jint, jint);
+
+/*
+ * Class:     de_funroll_loops_oscar_nc_OsmItem
+ * Method:    valueId
+ * Signature: (II)I
+ */
+JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_OsmItem_valueId
+  (JNIEnv *, jobject, jint, jint);
+
+/*
+ * Class:     de_funroll_loops_oscar_nc_OsmItem
  * Method:    key
  * Signature: (II)Ljava/lang/String;
  */
