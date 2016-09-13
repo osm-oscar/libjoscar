@@ -13,6 +13,14 @@ public class OsmItem extends Base<de.funroll_loops.oscar.nc.OsmItem> {
 		return cnc().id( ptr() );
 	}
 	
+	public int[] ancestors() {
+		return cnc().ancestors( ptr() );
+	}
+	
+	public boolean isRegion() {
+		return cnc().isRegion( ptr() );
+	}
+	
 	public int size() {
 		return cnc().size( ptr() );
 	}

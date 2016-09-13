@@ -6,6 +6,9 @@ public class OsmItem extends Base implements BaseInterface {
 	public native void destroy(int ptr);
 
 	public native int id(int ptr);
+	public native int[] ancestors(int ptr);
+	
+	public native boolean isRegion(int ptr);
 	
 	public native int size(int ptr);
 	public native String key(int ptr, int pos);

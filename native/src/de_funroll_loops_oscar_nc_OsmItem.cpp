@@ -68,6 +68,53 @@ JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_OsmItem_id
 
 /*
  * Class:     de_funroll_loops_oscar_nc_OsmItem
+ * Method:    ancestors
+ * Signature: (I)[I
+ */
+JNIEXPORT jintArray JNICALL Java_de_funroll_1loops_oscar_nc_OsmItem_ancestors
+  (JNIEnv * env, jobject, jint id)
+{
+	try {
+		auto itemPtr = objStore.get(id);
+		const auto & gh = itemPtr->db().geoHierarchy();
+		auto cells = itemPtr->cells();
+		std::vector<int> ancestors;
+		for(uint32_t c : cells) {
+			for(uint32_t i(gh.cellParentsBegin(c)), s(gh.cellParentsEnd(c)); i < s; ++i) {
+				ancestors.emplace_back( gh.cellPtrs().at(i) );
+			}
+		}
+		using std::sort;
+		using std::unique;
+		sort(ancestors.begin(), ancestors.end());
+		ancestors.resize(unique(ancestors.begin(), ancestors.end()) - ancestors.begin());
+		return libjoscar::toJIntArray(env, ancestors);
+	}
+	catch (...) {
+		libjoscar::swallow_cpp_exception_and_throw_java(env);
+		return libjoscar::toJIntArray(env, std::vector<int>());
+	}
+}
+
+/*
+ * Class:     de_funroll_loops_oscar_nc_OsmItem
+ * Method:    isRegion
+ * Signature: (I)Z
+ */
+JNIEXPORT jboolean JNICALL Java_de_funroll_1loops_oscar_nc_OsmItem_isRegion
+  (JNIEnv * env, jobject, jint id)
+{
+	try {
+		return objStore.get(id)->isRegion();
+	}
+	catch (...) {
+		libjoscar::swallow_cpp_exception_and_throw_java(env);
+		return false;
+	}
+}
+
+/*
+ * Class:     de_funroll_loops_oscar_nc_OsmItem
  * Method:    size
  * Signature: (I)I
  */

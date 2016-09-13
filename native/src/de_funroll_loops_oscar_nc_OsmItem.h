@@ -33,6 +33,22 @@ JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_OsmItem_id
 
 /*
  * Class:     de_funroll_loops_oscar_nc_OsmItem
+ * Method:    ancestors
+ * Signature: (I)[I
+ */
+JNIEXPORT jintArray JNICALL Java_de_funroll_1loops_oscar_nc_OsmItem_ancestors
+  (JNIEnv *, jobject, jint);
+
+/*
+ * Class:     de_funroll_loops_oscar_nc_OsmItem
+ * Method:    isRegion
+ * Signature: (I)Z
+ */
+JNIEXPORT jboolean JNICALL Java_de_funroll_1loops_oscar_nc_OsmItem_isRegion
+  (JNIEnv *, jobject, jint);
+
+/*
+ * Class:     de_funroll_loops_oscar_nc_OsmItem
  * Method:    size
  * Signature: (I)I
  */
