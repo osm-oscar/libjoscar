@@ -29,6 +29,7 @@ set(JOSCAR_SOURCES_CPP
 	native/src/de_funroll_loops_oscar_nc_OsmCompleter.cpp
 	native/src/de_funroll_loops_oscar_nc_OsmItem.cpp
 	native/src/de_funroll_loops_oscar_nc_OsmKeyValueObjectStore.cpp
+	native/src/de_funroll_loops_oscar_nc_StringTable.cpp
 	native/src/exceptionhelpers.cpp
 	native/src/helpers.cpp
 )

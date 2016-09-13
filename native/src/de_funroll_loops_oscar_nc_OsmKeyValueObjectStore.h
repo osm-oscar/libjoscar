@@ -39,6 +39,14 @@ JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_OsmKeyValueObjectStore_si
 JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_OsmKeyValueObjectStore_at
   (JNIEnv *, jobject, jint, jint);
 
+/*
+ * Class:     de_funroll_loops_oscar_nc_OsmKeyValueObjectStore
+ * Method:    keyStringTable
+ * Signature: (I)I
+ */
+JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_OsmKeyValueObjectStore_keyStringTable
+  (JNIEnv *, jobject, jint);
+
 #ifdef __cplusplus
 }
 #endif

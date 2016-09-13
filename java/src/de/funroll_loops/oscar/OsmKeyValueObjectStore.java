@@ -17,4 +17,7 @@ public class OsmKeyValueObjectStore extends Base<de.funroll_loops.oscar.nc.OsmKe
 		return new OsmItem( cnc().at(ptr(), pos) );
 	}
 	
+	public StringTable keyStringTable() {
+		return new StringTable( cnc().keyStringTable(ptr()) );
+	}
 }

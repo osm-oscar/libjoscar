@@ -82,3 +82,20 @@ JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_OsmKeyValueObjectStore_at
 		return -1;
 	}
 }
+
+/*
+ * Class:     de_funroll_loops_oscar_nc_OsmKeyValueObjectStore
+ * Method:    keyStringTable
+ * Signature: (I)I
+ */
+JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_OsmKeyValueObjectStore_keyStringTable
+  (JNIEnv * env, jobject, jint id)
+{
+	try {
+		return libjoscar::createStringTable( objStore.get(id)->keyStringTable() );
+	}
+	catch (...) {
+		libjoscar::swallow_cpp_exception_and_throw_java(env);
+		return -1;
+	}
+}

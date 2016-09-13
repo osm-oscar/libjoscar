@@ -8,4 +8,6 @@ public class OsmKeyValueObjectStore extends Base implements BaseInterface {
 	public native int size(int ptr);
 	
 	public native int at(int ptr, int pos);
+	
+	public native int keyStringTable(int ptr);
 }
