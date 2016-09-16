@@ -35,7 +35,7 @@ void swallow_cpp_exception_and_throw_java(JNIEnv * env) {
 	catch(const std::ios_base::failure& rhs) { //sample translation
 		//translate IO C++ exception to a Java exception
 		NewJavaException(env, "java/io/IOException", rhs.what()); 
-	} 
+	}
 	catch (const sserialize::InvalidReferenceException & e) {
 		NewJavaException(env, "java/lang/NullPointerException", e.what());
 	}

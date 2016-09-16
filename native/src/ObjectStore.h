@@ -7,6 +7,7 @@
 #include <stdexcept>
 
 #include <sserialize/utility/exceptions.h>
+#include <sserialize/mt/MultiReaderSingleWriterLock.h>
 
 namespace libjoscar {
 
@@ -17,11 +18,18 @@ public:
 public:
 	ObjectStore() {}
 	~ObjectStore();
+	///locks a readlock
 	bool count(int32_t id) const;
+	///locks a writelock
 	int32_t insert(T* ptr);
+	///locks a readlock
 	T * get(int32_t id);
+	///locks a writelock
 	void destroy(int32_t id);
 private:
+	bool unlocked_count(int32_t id) const;
+private:
+	mutable sserialize::MultiReaderSingleWriterLock m_lock;
 	std::vector<value_type*> m_d;
 	std::stack<std::size_t> m_fl; //free list
 };
@@ -29,20 +37,31 @@ private:
 
 template<typename T>
 ObjectStore<T>::~ObjectStore() {
+	sserialize::MultiReaderSingleWriterLock::WriteLock lck(m_lock);
 	for(value_type * t : m_d) {
 		delete t;
 	}
+	m_d.clear();
+	m_fl = decltype(m_fl)();
 }
 
 template<typename T>
 bool
 ObjectStore<T>::count(int32_t id) const {
-	return id >= 0 && m_d.size() > (std::size_t) id && m_d[id];
+	sserialize::MultiReaderSingleWriterLock::ReadLock lck(m_lock);
+	return unlocked_count(id);
+}
+
+template<typename T>
+bool
+ObjectStore<T>::unlocked_count(int32_t id) const {
+	return (id >= 0) && (m_d.size() > (std::size_t) id) && m_d[id];
 }
 
 template<typename T>
 int32_t
 ObjectStore<T>::insert(T * ptr) {
+	sserialize::MultiReaderSingleWriterLock::WriteLock lck(m_lock);
 	if (m_fl.size()) {
 		int32_t id = m_fl.top();
 		m_fl.pop();
@@ -59,18 +78,21 @@ ObjectStore<T>::insert(T * ptr) {
 template<typename T>
 T *
 ObjectStore<T>::get(int32_t id) {
-	T * t = m_d.at(id);
-	if (!t) {
+	sserialize::MultiReaderSingleWriterLock::ReadLock lck(m_lock);
+	if (!unlocked_count(id)) {
+		lck.unlock();
 		throw sserialize::InvalidReferenceException("ObjectStore::get(id) with id=" + std::to_string(id));
+		return 0;
 	}
-	return t;
+	return m_d[id];
 }
 
 template<typename T>
 void
 ObjectStore<T>::destroy(int32_t id) {
-	if (count(id)) {
-		delete get(id);
+	sserialize::MultiReaderSingleWriterLock::WriteLock lck(m_lock);
+	if (unlocked_count(id)) {
+		delete m_d[id];
 		m_d[id] = 0;
 		m_fl.emplace(id);
 	}

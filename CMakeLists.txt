@@ -37,6 +37,7 @@ set(JOSCAR_SOURCES_CPP
 SET(JOSCAR_LINK_LIBS
 	${LIBRT_LIBRARIES}
 	${liboscar_BINARY_DIR}/libliboscar.so
+	${sserialize_BINARY_DIR}/libsserialize.a
 )
 
 add_subdirectory(vendor/liboscar liboscar)
