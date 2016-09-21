@@ -94,8 +94,9 @@ JNIEXPORT jintArray JNICALL Java_de_funroll_1loops_oscar_nc_OsmItem_ancestors
 		else {
 			auto cells = itemPtr->cells();
 			for(uint32_t c : cells) {
-				for(uint32_t i(gh.cellParentsBegin(c)), s(gh.cellParentsEnd(c)); i < s; ++i) {
-					ancestors.emplace_back( gh.cellPtrs().at(i) );
+				auto cell = gh.cell(c);
+				for(uint32_t i(0), s(cell.parentsSize()); i < s; ++i) {
+					ancestors.emplace_back( cell.parent(i) );
 				}
 			}
 		}
@@ -103,6 +104,9 @@ JNIEXPORT jintArray JNICALL Java_de_funroll_1loops_oscar_nc_OsmItem_ancestors
 		using std::unique;
 		sort(ancestors.begin(), ancestors.end());
 		ancestors.resize(unique(ancestors.begin(), ancestors.end()) - ancestors.begin());
+		for(int & id : ancestors) {
+			id = gh.ghIdToStoreId(id);
+		}
 		return libjoscar::toJIntArray(env, ancestors);
 	}
 	catch (...) {
