@@ -8,7 +8,11 @@ public class OsmKeyValueObjectStore extends Base<de.funroll_loops.oscar.nc.OsmKe
 	public OsmKeyValueObjectStore(int ptr) {
 		super(new de.funroll_loops.oscar.nc.OsmKeyValueObjectStore(), ptr);
 	}
-	
+
+	public int numberOfRegions() {
+		return cnc().numberOfRegions( ptr() );
+	}
+
 	public int size() {
 		return cnc().size( ptr() );
 	}

@@ -5,6 +5,7 @@ public class OsmKeyValueObjectStore extends Base implements BaseInterface {
 	public native int create();
 	public native void destroy(int ptr);
 
+	public native int numberOfRegions(int ptr);
 	public native int size(int ptr);
 	
 	public native int at(int ptr, int pos);

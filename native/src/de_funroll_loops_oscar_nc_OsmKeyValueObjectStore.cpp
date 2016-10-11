@@ -51,6 +51,23 @@ JNIEXPORT void JNICALL Java_de_funroll_1loops_oscar_nc_OsmKeyValueObjectStore_de
 
 /*
  * Class:     de_funroll_loops_oscar_nc_OsmKeyValueObjectStore
+ * Method:    numberOfRegions
+ * Signature: (I)I
+ */
+JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_OsmKeyValueObjectStore_numberOfRegions
+  (JNIEnv * env, jobject, jint id)
+{
+	try {
+		return objStore.get(id)->geoHierarchy().regionSize();
+	}
+	catch (...) {
+		libjoscar::swallow_cpp_exception_and_throw_java(env);
+		return -1;
+	}
+}
+
+/*
+ * Class:     de_funroll_loops_oscar_nc_OsmKeyValueObjectStore
  * Method:    size
  * Signature: (I)I
  */
