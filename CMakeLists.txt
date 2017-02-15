@@ -5,7 +5,7 @@ find_package(JNI REQUIRED)
 # find_package(LIBRT REQUIRED)
 
 set(MY_C_FLAGS "${CMAKE_C_FLAGS} -frounding-math -std=c99 -Wall -Wextra -Wno-unknown-pragmas -Wstrict-overflow=4")
-set(MY_CXX_FLAGS "${CMAKE_CXX_FLAGS} -frounding-math -std=gnu++0x -Wall -Wextra -Wno-unknown-pragmas -Wstrict-overflow=4")
+set(MY_CXX_FLAGS "${CMAKE_CXX_FLAGS} -frounding-math -std=gnu++14 -Wall -Wextra -Wno-unknown-pragmas -Wstrict-overflow=4")
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${MY_C_FLAGS}")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${MY_CXX_FLAGS}")
