@@ -19,8 +19,9 @@ include_directories(
 	${CMAKE_CURRENT_BINARY_DIR}
 	${CMAKE_CURRENT_SOURCE_DIR}
 	${JNI_INCLUDE_DIRS}
-	${CMAKE_CURRENT_SOURCE_DIR}/vendor/liboscar/include
-	${CMAKE_CURRENT_SOURCE_DIR}/vendor/liboscar/vendor/sserialize/include
+	${CMAKE_SOURCE_DIR}/vendor/liboscar/include
+	${CMAKE_SOURCE_DIR}/vendor/liboscar/vendor/sserialize/include
+	${LIBDTS2_INCLUDE_DIR}
 )
 
 set(JOSCAR_SOURCES_CPP
