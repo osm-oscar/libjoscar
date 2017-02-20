@@ -37,7 +37,7 @@ private:
 	
 	using Mutex = std::mutex;
 	using ReadLock = std::unique_lock<Mutex>;
-	using WriteLock = std::unique_lock<Mutex>;
+	using WriteLock = ReadLock;
 private:
 	mutable Mutex m_lock;
 	std::vector<value_type*> m_d;
@@ -64,7 +64,7 @@ ObjectStore<T>::count(int32_t id) const {
 template<typename T>
 bool
 ObjectStore<T>::unlocked_count(int32_t id) const {
-	return (id >= 0) && (m_d.size() > (std::size_t) id) && m_d[id];
+	return ( (int64_t)m_d.size() > (int64_t) id) && m_d[id];
 }
 
 template<typename T>
@@ -88,12 +88,14 @@ template<typename T>
 T *
 ObjectStore<T>::get(int32_t id) {
 	ReadLock lck(m_lock);
-	if (!unlocked_count(id)) {
+	if (unlocked_count(id)) {
+		return m_d[id];
+	}
+	else {
 		lck.unlock();
 		throw sserialize::InvalidReferenceException("ObjectStore::get(id) with id=" + std::to_string(id));
 		return 0;
 	}
-	return m_d[id];
 }
 
 template<typename T>
