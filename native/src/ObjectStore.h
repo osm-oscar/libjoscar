@@ -5,11 +5,13 @@
 #include <stack>
 #include <limits>
 #include <stdexcept>
+#include <atomic>
 
 #include <sserialize/utility/exceptions.h>
 #include <sserialize/mt/MultiReaderSingleWriterLock.h>
 
 namespace libjoscar {
+namespace detail {
 
 template<typename T>
 class ObjectStore {
@@ -104,6 +106,60 @@ ObjectStore<T>::destroy(int32_t id) {
 		m_fl.emplace(id);
 	}
 }
+
+template<typename T, std::size_t T_SHIFT>
+class SlotedObjectStore {
+public:
+	using value_type = T;
+public:
+	SlotedObjectStore() : m_last(0) {}
+	~SlotedObjectStore() {}
+	///locks a readlock
+	bool count(int32_t id) const {
+		std::size_t mySlot = this->slot(id);
+		int32_t mySlotId = this->slotId(id);
+		return m_d.at(mySlot).count(mySlotId);
+	}
+	///locks a writelock
+	int32_t insert(T* ptr) {
+		std::size_t mySlot = m_last.fetch_add(1, std::memory_order_relaxed) % num_slots();
+		int32_t id = m_d[mySlot].insert(ptr);
+		return slotId2Id(id, mySlot);
+	}
+	///locks a readlock
+	T * get(int32_t id) {
+		std::size_t mySlot = this->slot(id);
+		int32_t mySlotId = this->slotId(id);
+		return m_d.at(mySlot).get(mySlotId);
+	}
+	///locks a writelock
+	void destroy(int32_t id) {
+		std::size_t mySlot = this->slot(id);
+		int32_t mySlotId = this->slotId(id);
+		return m_d.at(mySlot).destroy(mySlotId);
+	}
+private:
+	inline constexpr std::size_t num_slots() const {
+		return (1 << T_SHIFT);
+	}
+	inline std::size_t slot(int32_t id) const {
+		return id - ((id >> T_SHIFT) << T_SHIFT);
+	}
+	inline int32_t slotId(int32_t id) const {
+		return id >> T_SHIFT;
+	}
+	inline int32_t slotId2Id(int32_t id, std::size_t slot) const {
+		return (id << T_SHIFT) | slot;
+	}
+private:
+	std::array<ObjectStore<value_type>, (1 << T_SHIFT)> m_d;
+	std::atomic<std::size_t> m_last;
+};
+
+}//end namespace detail
+
+template<typename T>
+using ObjectStore = detail::SlotedObjectStore<T, 6>;
 
 }
 
