@@ -29,15 +29,22 @@ public:
 private:
 	bool unlocked_count(int32_t id) const;
 private:
-	mutable sserialize::MultiReaderSingleWriterLock m_lock;
+// 	using Mutex = sserialize::MultiReaderSingleWriterLock;
+// 	using ReadLock = sserialize::MultiReaderSingleWriterLock::ReadLock;
+// 	using WriteLock = sserialize::MultiReaderSingleWriterLock::WriteLock;
+	
+	using Mutex = std::mutex;
+	using ReadLock = std::unique_lock<Mutex>;
+	using WriteLock = std::unique_lock<Mutex>;
+private:
+	mutable Mutex m_lock;
 	std::vector<value_type*> m_d;
 	std::stack<std::size_t> m_fl; //free list
 };
 
-
 template<typename T>
 ObjectStore<T>::~ObjectStore() {
-	sserialize::MultiReaderSingleWriterLock::WriteLock lck(m_lock);
+	WriteLock lck(m_lock);
 	for(value_type * t : m_d) {
 		delete t;
 	}
@@ -48,7 +55,7 @@ ObjectStore<T>::~ObjectStore() {
 template<typename T>
 bool
 ObjectStore<T>::count(int32_t id) const {
-	sserialize::MultiReaderSingleWriterLock::ReadLock lck(m_lock);
+	ReadLock lck(m_lock);
 	return unlocked_count(id);
 }
 
@@ -61,7 +68,7 @@ ObjectStore<T>::unlocked_count(int32_t id) const {
 template<typename T>
 int32_t
 ObjectStore<T>::insert(T * ptr) {
-	sserialize::MultiReaderSingleWriterLock::WriteLock lck(m_lock);
+	WriteLock lck(m_lock);
 	if (m_fl.size()) {
 		int32_t id = m_fl.top();
 		m_fl.pop();
@@ -78,7 +85,7 @@ ObjectStore<T>::insert(T * ptr) {
 template<typename T>
 T *
 ObjectStore<T>::get(int32_t id) {
-	sserialize::MultiReaderSingleWriterLock::ReadLock lck(m_lock);
+	ReadLock lck(m_lock);
 	if (!unlocked_count(id)) {
 		lck.unlock();
 		throw sserialize::InvalidReferenceException("ObjectStore::get(id) with id=" + std::to_string(id));
@@ -90,7 +97,7 @@ ObjectStore<T>::get(int32_t id) {
 template<typename T>
 void
 ObjectStore<T>::destroy(int32_t id) {
-	sserialize::MultiReaderSingleWriterLock::WriteLock lck(m_lock);
+	WriteLock lck(m_lock);
 	if (unlocked_count(id)) {
 		delete m_d[id];
 		m_d[id] = 0;
