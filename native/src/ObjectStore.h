@@ -6,6 +6,7 @@
 #include <limits>
 #include <stdexcept>
 #include <atomic>
+#include <functional>
 
 #include <sserialize/utility/exceptions.h>
 #include <sserialize/mt/MultiReaderSingleWriterLock.h>
@@ -162,13 +163,13 @@ private:
 template<typename T>
 class CastObjectStore {
 public:
-	using value_type = T;
+	using value_type = typename std::enable_if<sizeof(T*) <= sizeof(JavaNativeHandle), T>::type;
 public:
 	CastObjectStore() {}
 	~CastObjectStore() {}
 	bool count(JavaNativeHandle id) const { return id != 0; }
-	JavaNativeHandle insert(T* ptr) { return reinterpret_cast<JavaNativeHandle>(ptr); }
-	T * get(JavaNativeHandle id) { return reinterpret_cast<T*>(id); }
+	JavaNativeHandle insert(value_type* ptr) { return reinterpret_cast<JavaNativeHandle>(ptr); }
+	value_type * get(JavaNativeHandle id) { return reinterpret_cast<value_type*>(id); }
 	void destroy(JavaNativeHandle id) { delete get(id); }
 };
 
