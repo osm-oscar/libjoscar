@@ -10,7 +10,7 @@ namespace {
 
 namespace libjoscar {
 
-int createOsmItem(const liboscar::Static::OsmKeyValueObjectStore::Item & v) {
+JavaNativeHandle createOsmItem(const liboscar::Static::OsmKeyValueObjectStore::Item & v) {
 	return objStore.insert( new liboscar::Static::OsmKeyValueObjectStore::Item(v) );
 }
 
@@ -21,7 +21,7 @@ int createOsmItem(const liboscar::Static::OsmKeyValueObjectStore::Item & v) {
  * Method:    create
  * Signature: ()I
  */
-JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_OsmItem_create
+JNIEXPORT JavaNativeHandle JNICALL Java_de_funroll_1loops_oscar_nc_OsmItem_create
   (JNIEnv * env, jobject)
 {
 	try {
@@ -39,7 +39,7 @@ JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_OsmItem_create
  * Signature: (I)Z
  */
 JNIEXPORT void JNICALL Java_de_funroll_1loops_oscar_nc_OsmItem_destroy
-  (JNIEnv * env, jobject, jint id)
+  (JNIEnv * env, jobject, JavaNativeHandle id)
 {
 	try {
 		objStore.destroy(id);
@@ -55,7 +55,7 @@ JNIEXPORT void JNICALL Java_de_funroll_1loops_oscar_nc_OsmItem_destroy
  * Signature: (I)I
  */
 JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_OsmItem_id
-  (JNIEnv * env, jobject, jint id)
+  (JNIEnv * env, jobject, JavaNativeHandle id)
 {
 	try {
 		return objStore.get(id)->id();
@@ -72,7 +72,7 @@ JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_OsmItem_id
  * Signature: (I)[I
  */
 JNIEXPORT jintArray JNICALL Java_de_funroll_1loops_oscar_nc_OsmItem_ancestors
-  (JNIEnv * env, jobject, jint id)
+  (JNIEnv * env, jobject, JavaNativeHandle id)
 {
 	try {
 		auto itemPtr = objStore.get(id);
@@ -121,7 +121,7 @@ JNIEXPORT jintArray JNICALL Java_de_funroll_1loops_oscar_nc_OsmItem_ancestors
  * Signature: (I)Z
  */
 JNIEXPORT jboolean JNICALL Java_de_funroll_1loops_oscar_nc_OsmItem_isRegion
-  (JNIEnv * env, jobject, jint id)
+  (JNIEnv * env, jobject, JavaNativeHandle id)
 {
 	try {
 		return objStore.get(id)->isRegion();
@@ -138,7 +138,7 @@ JNIEXPORT jboolean JNICALL Java_de_funroll_1loops_oscar_nc_OsmItem_isRegion
  * Signature: (I)I
  */
 JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_OsmItem_size
-  (JNIEnv * env, jobject, jint id)
+  (JNIEnv * env, jobject, JavaNativeHandle id)
 {
 	try {
 		return objStore.get(id)->size();
@@ -155,7 +155,7 @@ JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_OsmItem_size
  * Signature: (II)I
  */
 JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_OsmItem_keyId
-  (JNIEnv * env, jobject, jint id, jint pos)
+  (JNIEnv * env, jobject, JavaNativeHandle id, jint pos)
 {
 	try {
 		return objStore.get(id)->keyId(pos);
@@ -172,7 +172,7 @@ JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_OsmItem_keyId
  * Signature: (II)I
  */
 JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_OsmItem_valueId
-  (JNIEnv * env, jobject, jint id, jint pos)
+  (JNIEnv * env, jobject, JavaNativeHandle id, jint pos)
 {
 	try {
 		return objStore.get(id)->valueId(pos);
@@ -189,7 +189,7 @@ JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_OsmItem_valueId
  * Signature: (II)Ljava/lang/String;
  */
 JNIEXPORT jstring JNICALL Java_de_funroll_1loops_oscar_nc_OsmItem_key
-  (JNIEnv * env, jobject, jint id, jint pos)
+  (JNIEnv * env, jobject, JavaNativeHandle id, jint pos)
 {
 	try {
 		return libjoscar::toJString(env, objStore.get(id)->key(pos) );
@@ -206,7 +206,7 @@ JNIEXPORT jstring JNICALL Java_de_funroll_1loops_oscar_nc_OsmItem_key
  * Signature: (II)Ljava/lang/String;
  */
 JNIEXPORT jstring JNICALL Java_de_funroll_1loops_oscar_nc_OsmItem_value
-  (JNIEnv * env, jobject, jint id, jint pos)
+  (JNIEnv * env, jobject, JavaNativeHandle id, jint pos)
 {
 	try {
 		return libjoscar::toJString(env, objStore.get(id)->value(pos) );

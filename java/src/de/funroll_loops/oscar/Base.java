@@ -1,8 +1,10 @@
 package de.funroll_loops.oscar;
 
+import de.funroll_loops.oscar.nc.BaseInterface;
+
 class Base<T_NATIVE_COMMUNICATOR extends de.funroll_loops.oscar.nc.BaseInterface> {
 	protected T_NATIVE_COMMUNICATOR m_nc;
-	protected int m_ptr;
+	protected long m_ptr;
 	
 	protected T_NATIVE_COMMUNICATOR nc() {
 		return m_nc;
@@ -14,7 +16,7 @@ class Base<T_NATIVE_COMMUNICATOR extends de.funroll_loops.oscar.nc.BaseInterface
 		return nc();
 	}
 	
-	protected int ptr() {
+	protected long ptr() {
 		return m_ptr;
 	}
 	
@@ -28,7 +30,7 @@ class Base<T_NATIVE_COMMUNICATOR extends de.funroll_loops.oscar.nc.BaseInterface
 	}
 	
 	protected void close() {
-		if (ptr() >= 0) {
+		if (valid()) {
 			nc().destroy( ptr() );
 		}
 	}
@@ -42,10 +44,10 @@ class Base<T_NATIVE_COMMUNICATOR extends de.funroll_loops.oscar.nc.BaseInterface
 	//public functions
 	
 	public Base() {
-		m_ptr = -1;
+		m_ptr = BaseInterface.null_pointer;
 	}
 	
-	public Base(T_NATIVE_COMMUNICATOR _nc, int _ptr) {
+	public Base(T_NATIVE_COMMUNICATOR _nc, long _ptr) {
 		m_nc = _nc;
 		m_ptr = _ptr;
 	}
@@ -56,6 +58,6 @@ class Base<T_NATIVE_COMMUNICATOR extends de.funroll_loops.oscar.nc.BaseInterface
 	}
 	
 	public boolean valid() {
-		return m_ptr >= 0;
+		return m_ptr != BaseInterface.null_pointer;
 	}
 }

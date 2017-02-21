@@ -10,50 +10,50 @@ extern "C" {
 /*
  * Class:     de_funroll_loops_oscar_nc_GeoHierarchySubSet
  * Method:    create
- * Signature: ()I
+ * Signature: ()J
  */
-JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_GeoHierarchySubSet_create
+JNIEXPORT jlong JNICALL Java_de_funroll_1loops_oscar_nc_GeoHierarchySubSet_create
   (JNIEnv *, jobject);
 
 /*
  * Class:     de_funroll_loops_oscar_nc_GeoHierarchySubSet
  * Method:    destroy
- * Signature: (I)V
+ * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_de_funroll_1loops_oscar_nc_GeoHierarchySubSet_destroy
-  (JNIEnv *, jobject, jint);
+  (JNIEnv *, jobject, jlong);
 
 /*
  * Class:     de_funroll_loops_oscar_nc_GeoHierarchySubSet
  * Method:    cellCount
- * Signature: (I)I
+ * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_GeoHierarchySubSet_cellCount
-  (JNIEnv *, jobject, jint);
+  (JNIEnv *, jobject, jlong);
 
 /*
  * Class:     de_funroll_loops_oscar_nc_GeoHierarchySubSet
  * Method:    itemCount
- * Signature: (I)I
+ * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_GeoHierarchySubSet_itemCount
-  (JNIEnv *, jobject, jint);
+  (JNIEnv *, jobject, jlong);
 
 /*
  * Class:     de_funroll_loops_oscar_nc_GeoHierarchySubSet
  * Method:    topK
- * Signature: (II)[I
+ * Signature: (JI)[I
  */
 JNIEXPORT jintArray JNICALL Java_de_funroll_1loops_oscar_nc_GeoHierarchySubSet_topK
-  (JNIEnv *, jobject, jint, jint);
+  (JNIEnv *, jobject, jlong, jint);
 
 /*
  * Class:     de_funroll_loops_oscar_nc_GeoHierarchySubSet
  * Method:    flaten
- * Signature: (I)[I
+ * Signature: (J)[I
  */
 JNIEXPORT jintArray JNICALL Java_de_funroll_1loops_oscar_nc_GeoHierarchySubSet_flaten
-  (JNIEnv *, jobject, jint);
+  (JNIEnv *, jobject, jlong);
 
 #ifdef __cplusplus
 }

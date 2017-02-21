@@ -5,7 +5,7 @@ public class OsmItem extends Base<de.funroll_loops.oscar.nc.OsmItem> {
 	public OsmItem() {
 	}
 
-	public OsmItem(int _ptr) {
+	public OsmItem(long _ptr) {
 		super(new de.funroll_loops.oscar.nc.OsmItem(), _ptr);
 	}
 	

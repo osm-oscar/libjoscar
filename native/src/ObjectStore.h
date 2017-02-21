@@ -9,6 +9,7 @@
 
 #include <sserialize/utility/exceptions.h>
 #include <sserialize/mt/MultiReaderSingleWriterLock.h>
+#include "types.h"
 
 namespace libjoscar {
 namespace detail {
@@ -21,15 +22,15 @@ public:
 	ObjectStore() {}
 	~ObjectStore();
 	///locks a readlock
-	bool count(int32_t id) const;
+	bool count(JavaNativeHandle id) const;
 	///locks a writelock
-	int32_t insert(T* ptr);
+	JavaNativeHandle insert(T* ptr);
 	///locks a readlock
-	T * get(int32_t id);
+	T * get(JavaNativeHandle id);
 	///locks a writelock
-	void destroy(int32_t id);
+	void destroy(JavaNativeHandle id);
 private:
-	bool unlocked_count(int32_t id) const;
+	bool unlocked_count(JavaNativeHandle id) const;
 private:
 // 	using Mutex = sserialize::MultiReaderSingleWriterLock;
 // 	using ReadLock = sserialize::MultiReaderSingleWriterLock::ReadLock;
@@ -56,29 +57,29 @@ ObjectStore<T>::~ObjectStore() {
 
 template<typename T>
 bool
-ObjectStore<T>::count(int32_t id) const {
+ObjectStore<T>::count(JavaNativeHandle id) const {
 	ReadLock lck(m_lock);
 	return unlocked_count(id);
 }
 
 template<typename T>
 bool
-ObjectStore<T>::unlocked_count(int32_t id) const {
+ObjectStore<T>::unlocked_count(JavaNativeHandle id) const {
 	return ( (int64_t)m_d.size() > (int64_t) id) && m_d[id];
 }
 
 template<typename T>
-int32_t
-ObjectStore<T>::insert(T * ptr) {
+JavaNativeHandle
+ObjectStore<T>::insert(T* ptr) {
 	WriteLock lck(m_lock);
 	if (m_fl.size()) {
-		int32_t id = m_fl.top();
+		JavaNativeHandle id = m_fl.top();
 		m_fl.pop();
 		m_d[id] = ptr;
 		return id;
 	}
 	else {
-		int32_t id = m_d.size();
+		JavaNativeHandle id = m_d.size();
 		m_d.emplace_back(ptr);
 		return id;
 	}
@@ -86,7 +87,7 @@ ObjectStore<T>::insert(T * ptr) {
 
 template<typename T>
 T *
-ObjectStore<T>::get(int32_t id) {
+ObjectStore<T>::get(JavaNativeHandle id) {
 	ReadLock lck(m_lock);
 	if (unlocked_count(id)) {
 		return m_d[id];
@@ -100,7 +101,7 @@ ObjectStore<T>::get(int32_t id) {
 
 template<typename T>
 void
-ObjectStore<T>::destroy(int32_t id) {
+ObjectStore<T>::destroy(JavaNativeHandle id) {
 	WriteLock lck(m_lock);
 	if (unlocked_count(id)) {
 		delete m_d[id];
@@ -117,40 +118,40 @@ public:
 	SlotedObjectStore() : m_last(0) {}
 	~SlotedObjectStore() {}
 	///locks a readlock
-	bool count(int32_t id) const {
+	bool count(JavaNativeHandle id) const {
 		std::size_t mySlot = this->slot(id);
-		int32_t mySlotId = this->slotId(id);
+		JavaNativeHandle mySlotId = this->slotId(id);
 		return m_d.at(mySlot).count(mySlotId);
 	}
 	///locks a writelock
-	int32_t insert(T* ptr) {
+	JavaNativeHandle insert(T* ptr) {
 		std::size_t mySlot = m_last.fetch_add(1, std::memory_order_relaxed) % num_slots();
-		int32_t id = m_d[mySlot].insert(ptr);
+		JavaNativeHandle id = m_d[mySlot].insert(ptr);
 		return slotId2Id(id, mySlot);
 	}
 	///locks a readlock
-	T * get(int32_t id) {
+	T * get(JavaNativeHandle id) {
 		std::size_t mySlot = this->slot(id);
-		int32_t mySlotId = this->slotId(id);
+		JavaNativeHandle mySlotId = this->slotId(id);
 		return m_d.at(mySlot).get(mySlotId);
 	}
 	///locks a writelock
-	void destroy(int32_t id) {
+	void destroy(JavaNativeHandle id) {
 		std::size_t mySlot = this->slot(id);
-		int32_t mySlotId = this->slotId(id);
+		JavaNativeHandle mySlotId = this->slotId(id);
 		return m_d.at(mySlot).destroy(mySlotId);
 	}
 private:
 	inline constexpr std::size_t num_slots() const {
 		return (1 << T_SHIFT);
 	}
-	inline std::size_t slot(int32_t id) const {
+	inline std::size_t slot(JavaNativeHandle id) const {
 		return id - ((id >> T_SHIFT) << T_SHIFT);
 	}
-	inline int32_t slotId(int32_t id) const {
+	inline JavaNativeHandle slotId(JavaNativeHandle id) const {
 		return id >> T_SHIFT;
 	}
-	inline int32_t slotId2Id(int32_t id, std::size_t slot) const {
+	inline JavaNativeHandle slotId2Id(JavaNativeHandle id, std::size_t slot) const {
 		return (id << T_SHIFT) | slot;
 	}
 private:
@@ -158,10 +159,24 @@ private:
 	std::atomic<std::size_t> m_last;
 };
 
+template<typename T>
+class CastObjectStore {
+public:
+	using value_type = T;
+public:
+	CastObjectStore() {}
+	~CastObjectStore() {}
+	bool count(JavaNativeHandle id) const { return id != 0; }
+	JavaNativeHandle insert(T* ptr) { return reinterpret_cast<JavaNativeHandle>(ptr); }
+	T * get(JavaNativeHandle id) { return reinterpret_cast<T*>(id); }
+	void destroy(JavaNativeHandle id) { delete get(id); }
+};
+
 }//end namespace detail
 
 template<typename T>
-using ObjectStore = detail::SlotedObjectStore<T, 6>;
+// using ObjectStore = detail::SlotedObjectStore<T, 6>;
+using ObjectStore = detail::CastObjectStore<T>;
 
 }
 

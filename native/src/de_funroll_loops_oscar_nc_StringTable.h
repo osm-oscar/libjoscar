@@ -10,34 +10,34 @@ extern "C" {
 /*
  * Class:     de_funroll_loops_oscar_nc_StringTable
  * Method:    create
- * Signature: ()I
+ * Signature: ()J
  */
-JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_StringTable_create
+JNIEXPORT jlong JNICALL Java_de_funroll_1loops_oscar_nc_StringTable_create
   (JNIEnv *, jobject);
 
 /*
  * Class:     de_funroll_loops_oscar_nc_StringTable
  * Method:    destroy
- * Signature: (I)V
+ * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_de_funroll_1loops_oscar_nc_StringTable_destroy
-  (JNIEnv *, jobject, jint);
+  (JNIEnv *, jobject, jlong);
 
 /*
  * Class:     de_funroll_loops_oscar_nc_StringTable
  * Method:    size
- * Signature: (I)I
+ * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_StringTable_size
-  (JNIEnv *, jobject, jint);
+  (JNIEnv *, jobject, jlong);
 
 /*
  * Class:     de_funroll_loops_oscar_nc_StringTable
  * Method:    at
- * Signature: (II)Ljava/lang/String;
+ * Signature: (JI)Ljava/lang/String;
  */
 JNIEXPORT jstring JNICALL Java_de_funroll_1loops_oscar_nc_StringTable_at
-  (JNIEnv *, jobject, jint, jint);
+  (JNIEnv *, jobject, jlong, jint);
 
 #ifdef __cplusplus
 }

@@ -2,13 +2,14 @@
 #define LIB_J_OSCAR_CREATION_HELPERS_H
 #pragma once
 #include <liboscar/StaticOsmCompleter.h>
+#include "types.h"
 
 namespace libjoscar {
 
-int createStore(const liboscar::Static::OsmKeyValueObjectStore & v);
-int createStringTable(const sserialize::Static::StringTable & v);
-int createOsmItem(const liboscar::Static::OsmKeyValueObjectStore::Item & v);
-int createGeoHierarchySubSet(const sserialize::Static::spatial::GeoHierarchy::SubSet & v);
+JavaNativeHandle createStore(const liboscar::Static::OsmKeyValueObjectStore & v);
+JavaNativeHandle createStringTable(const sserialize::Static::StringTable & v);
+JavaNativeHandle createOsmItem(const liboscar::Static::OsmKeyValueObjectStore::Item & v);
+JavaNativeHandle createGeoHierarchySubSet(const sserialize::Static::spatial::GeoHierarchy::SubSet & v);
 
 }
 

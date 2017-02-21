@@ -10,7 +10,7 @@ namespace {
 
 namespace libjoscar {
 
-int createGeoHierarchySubSet(const sserialize::Static::spatial::GeoHierarchy::SubSet & v) {
+JavaNativeHandle createGeoHierarchySubSet(const sserialize::Static::spatial::GeoHierarchy::SubSet & v) {
 	return objStore.insert(new sserialize::Static::spatial::GeoHierarchy::SubSet(v) );
 }
 
@@ -21,7 +21,7 @@ int createGeoHierarchySubSet(const sserialize::Static::spatial::GeoHierarchy::Su
  * Method:    create
  * Signature: ()I
  */
-JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_GeoHierarchySubSet_create
+JNIEXPORT JavaNativeHandle JNICALL Java_de_funroll_1loops_oscar_nc_GeoHierarchySubSet_create
   (JNIEnv * env, jobject)
 {
 	try {
@@ -39,7 +39,7 @@ JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_GeoHierarchySubSet_create
  * Signature: (I)V
  */
 JNIEXPORT void JNICALL Java_de_funroll_1loops_oscar_nc_GeoHierarchySubSet_destroy
-  (JNIEnv * env, jobject, jint id)
+  (JNIEnv * env, jobject, JavaNativeHandle id)
 {
 	try {
 		return objStore.destroy(id);
@@ -55,7 +55,7 @@ JNIEXPORT void JNICALL Java_de_funroll_1loops_oscar_nc_GeoHierarchySubSet_destro
  * Signature: (I)I
  */
 JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_GeoHierarchySubSet_cellCount
-  (JNIEnv * env, jobject, jint id)
+  (JNIEnv * env, jobject, JavaNativeHandle id)
 {
 	try {
 		return objStore.get(id)->cqr().cellCount();
@@ -72,7 +72,7 @@ JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_GeoHierarchySubSet_cellCo
  * Signature: (I)I
  */
 JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_GeoHierarchySubSet_itemCount
-  (JNIEnv * env, jobject, jint id)
+  (JNIEnv * env, jobject, JavaNativeHandle id)
 {
 	try {
 		return objStore.get(id)->cqr().flaten().size();
@@ -89,7 +89,7 @@ JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_GeoHierarchySubSet_itemCo
  * Signature: (II)[I
  */
 JNIEXPORT jintArray JNICALL Java_de_funroll_1loops_oscar_nc_GeoHierarchySubSet_topK
-  (JNIEnv * env, jobject, jint id, jint count)
+  (JNIEnv * env, jobject, JavaNativeHandle id, jint count)
 {
 	try {
 		auto ghs = objStore.get(id);
@@ -108,7 +108,7 @@ JNIEXPORT jintArray JNICALL Java_de_funroll_1loops_oscar_nc_GeoHierarchySubSet_t
  * Signature: (I)[I
  */
 JNIEXPORT jintArray JNICALL Java_de_funroll_1loops_oscar_nc_GeoHierarchySubSet_flaten
-  (JNIEnv * env, jobject, jint id)
+  (JNIEnv * env, jobject, JavaNativeHandle id)
 {
 	try {
 		auto ghs = objStore.get(id);

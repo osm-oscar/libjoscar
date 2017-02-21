@@ -2,13 +2,13 @@ package de.funroll_loops.oscar.nc;
 
 public class OsmKeyValueObjectStore extends Base implements BaseInterface {
 	
-	public native int create();
-	public native void destroy(int ptr);
+	public native long create();
+	public native void destroy(long ptr);
 
-	public native int numberOfRegions(int ptr);
-	public native int size(int ptr);
+	public native int numberOfRegions(long ptr);
+	public native int size(long ptr);
 	
-	public native int at(int ptr, int pos);
+	public native long at(long ptr, int pos);
 	
-	public native int keyStringTable(int ptr);
+	public native long keyStringTable(long ptr);
 }

@@ -10,7 +10,7 @@ namespace {
 
 namespace libjoscar {
 
-int createStore(const liboscar::Static::OsmKeyValueObjectStore & v) {
+JavaNativeHandle createStore(const liboscar::Static::OsmKeyValueObjectStore & v) {
 	return objStore.insert(new liboscar::Static::OsmKeyValueObjectStore(v) );
 }
 
@@ -21,7 +21,7 @@ int createStore(const liboscar::Static::OsmKeyValueObjectStore & v) {
  * Method:    create
  * Signature: ()I
  */
-JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_OsmKeyValueObjectStore_create
+JNIEXPORT JavaNativeHandle JNICALL Java_de_funroll_1loops_oscar_nc_OsmKeyValueObjectStore_create
   (JNIEnv * env, jobject)
 {
 	try {
@@ -39,7 +39,7 @@ JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_OsmKeyValueObjectStore_cr
  * Signature: (I)Z
  */
 JNIEXPORT void JNICALL Java_de_funroll_1loops_oscar_nc_OsmKeyValueObjectStore_destroy
-  (JNIEnv * env, jobject, jint id)
+  (JNIEnv * env, jobject, JavaNativeHandle id)
 {
 	try {
 		objStore.destroy(id);
@@ -55,7 +55,7 @@ JNIEXPORT void JNICALL Java_de_funroll_1loops_oscar_nc_OsmKeyValueObjectStore_de
  * Signature: (I)I
  */
 JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_OsmKeyValueObjectStore_numberOfRegions
-  (JNIEnv * env, jobject, jint id)
+  (JNIEnv * env, jobject, JavaNativeHandle id)
 {
 	try {
 		return objStore.get(id)->geoHierarchy().regionSize();
@@ -72,7 +72,7 @@ JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_OsmKeyValueObjectStore_nu
  * Signature: (I)I
  */
 JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_OsmKeyValueObjectStore_size
-  (JNIEnv * env, jobject, jint id)
+  (JNIEnv * env, jobject, JavaNativeHandle id)
 {
 	try {
 		return objStore.get(id)->size();
@@ -88,8 +88,8 @@ JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_OsmKeyValueObjectStore_si
  * Method:    at
  * Signature: (II)I
  */
-JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_OsmKeyValueObjectStore_at
-  (JNIEnv * env, jobject, jint id, jint pos)
+JNIEXPORT JavaNativeHandle JNICALL Java_de_funroll_1loops_oscar_nc_OsmKeyValueObjectStore_at
+  (JNIEnv * env, jobject, JavaNativeHandle id, jint pos)
 {
 	try {
 		return libjoscar::createOsmItem( objStore.get(id)->at(pos) );
@@ -105,8 +105,8 @@ JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_OsmKeyValueObjectStore_at
  * Method:    keyStringTable
  * Signature: (I)I
  */
-JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_OsmKeyValueObjectStore_keyStringTable
-  (JNIEnv * env, jobject, jint id)
+JNIEXPORT JavaNativeHandle JNICALL Java_de_funroll_1loops_oscar_nc_OsmKeyValueObjectStore_keyStringTable
+  (JNIEnv * env, jobject, JavaNativeHandle id)
 {
 	try {
 		return libjoscar::createStringTable( objStore.get(id)->keyStringTable() );

@@ -10,82 +10,82 @@ extern "C" {
 /*
  * Class:     de_funroll_loops_oscar_nc_OsmItem
  * Method:    create
- * Signature: ()I
+ * Signature: ()J
  */
-JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_OsmItem_create
+JNIEXPORT jlong JNICALL Java_de_funroll_1loops_oscar_nc_OsmItem_create
   (JNIEnv *, jobject);
 
 /*
  * Class:     de_funroll_loops_oscar_nc_OsmItem
  * Method:    destroy
- * Signature: (I)V
+ * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_de_funroll_1loops_oscar_nc_OsmItem_destroy
-  (JNIEnv *, jobject, jint);
+  (JNIEnv *, jobject, jlong);
 
 /*
  * Class:     de_funroll_loops_oscar_nc_OsmItem
  * Method:    id
- * Signature: (I)I
+ * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_OsmItem_id
-  (JNIEnv *, jobject, jint);
+  (JNIEnv *, jobject, jlong);
 
 /*
  * Class:     de_funroll_loops_oscar_nc_OsmItem
  * Method:    ancestors
- * Signature: (I)[I
+ * Signature: (J)[I
  */
 JNIEXPORT jintArray JNICALL Java_de_funroll_1loops_oscar_nc_OsmItem_ancestors
-  (JNIEnv *, jobject, jint);
+  (JNIEnv *, jobject, jlong);
 
 /*
  * Class:     de_funroll_loops_oscar_nc_OsmItem
  * Method:    isRegion
- * Signature: (I)Z
+ * Signature: (J)Z
  */
 JNIEXPORT jboolean JNICALL Java_de_funroll_1loops_oscar_nc_OsmItem_isRegion
-  (JNIEnv *, jobject, jint);
+  (JNIEnv *, jobject, jlong);
 
 /*
  * Class:     de_funroll_loops_oscar_nc_OsmItem
  * Method:    size
- * Signature: (I)I
+ * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_OsmItem_size
-  (JNIEnv *, jobject, jint);
+  (JNIEnv *, jobject, jlong);
 
 /*
  * Class:     de_funroll_loops_oscar_nc_OsmItem
  * Method:    keyId
- * Signature: (II)I
+ * Signature: (JI)I
  */
 JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_OsmItem_keyId
-  (JNIEnv *, jobject, jint, jint);
+  (JNIEnv *, jobject, jlong, jint);
 
 /*
  * Class:     de_funroll_loops_oscar_nc_OsmItem
  * Method:    valueId
- * Signature: (II)I
+ * Signature: (JI)I
  */
 JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_OsmItem_valueId
-  (JNIEnv *, jobject, jint, jint);
+  (JNIEnv *, jobject, jlong, jint);
 
 /*
  * Class:     de_funroll_loops_oscar_nc_OsmItem
  * Method:    key
- * Signature: (II)Ljava/lang/String;
+ * Signature: (JI)Ljava/lang/String;
  */
 JNIEXPORT jstring JNICALL Java_de_funroll_1loops_oscar_nc_OsmItem_key
-  (JNIEnv *, jobject, jint, jint);
+  (JNIEnv *, jobject, jlong, jint);
 
 /*
  * Class:     de_funroll_loops_oscar_nc_OsmItem
  * Method:    value
- * Signature: (II)Ljava/lang/String;
+ * Signature: (JI)Ljava/lang/String;
  */
 JNIEXPORT jstring JNICALL Java_de_funroll_1loops_oscar_nc_OsmItem_value
-  (JNIEnv *, jobject, jint, jint);
+  (JNIEnv *, jobject, jlong, jint);
 
 #ifdef __cplusplus
 }

@@ -10,50 +10,50 @@ extern "C" {
 /*
  * Class:     de_funroll_loops_oscar_nc_OsmCompleter
  * Method:    create
- * Signature: ()I
+ * Signature: ()J
  */
-JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_OsmCompleter_create
+JNIEXPORT jlong JNICALL Java_de_funroll_1loops_oscar_nc_OsmCompleter_create
   (JNIEnv *, jobject);
 
 /*
  * Class:     de_funroll_loops_oscar_nc_OsmCompleter
  * Method:    destroy
- * Signature: (I)V
+ * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_de_funroll_1loops_oscar_nc_OsmCompleter_destroy
-  (JNIEnv *, jobject, jint);
+  (JNIEnv *, jobject, jlong);
 
 /*
  * Class:     de_funroll_loops_oscar_nc_OsmCompleter
  * Method:    setFilePrefix
- * Signature: (ILjava/lang/String;)V
+ * Signature: (JLjava/lang/String;)V
  */
 JNIEXPORT void JNICALL Java_de_funroll_1loops_oscar_nc_OsmCompleter_setFilePrefix
-  (JNIEnv *, jobject, jint, jstring);
+  (JNIEnv *, jobject, jlong, jstring);
 
 /*
  * Class:     de_funroll_loops_oscar_nc_OsmCompleter
  * Method:    energize
- * Signature: (I)V
+ * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_de_funroll_1loops_oscar_nc_OsmCompleter_energize
-  (JNIEnv *, jobject, jint);
+  (JNIEnv *, jobject, jlong);
 
 /*
  * Class:     de_funroll_loops_oscar_nc_OsmCompleter
  * Method:    store
- * Signature: (I)I
+ * Signature: (J)J
  */
-JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_OsmCompleter_store
-  (JNIEnv *, jobject, jint);
+JNIEXPORT jlong JNICALL Java_de_funroll_1loops_oscar_nc_OsmCompleter_store
+  (JNIEnv *, jobject, jlong);
 
 /*
  * Class:     de_funroll_loops_oscar_nc_OsmCompleter
  * Method:    clusteredComplete
- * Signature: (ILjava/lang/String;Z)I
+ * Signature: (JLjava/lang/String;Z)J
  */
-JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_OsmCompleter_clusteredComplete
-  (JNIEnv *, jobject, jint, jstring, jboolean);
+JNIEXPORT jlong JNICALL Java_de_funroll_1loops_oscar_nc_OsmCompleter_clusteredComplete
+  (JNIEnv *, jobject, jlong, jstring, jboolean);
 
 #ifdef __cplusplus
 }

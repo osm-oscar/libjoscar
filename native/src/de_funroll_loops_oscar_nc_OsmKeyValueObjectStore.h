@@ -10,50 +10,50 @@ extern "C" {
 /*
  * Class:     de_funroll_loops_oscar_nc_OsmKeyValueObjectStore
  * Method:    create
- * Signature: ()I
+ * Signature: ()J
  */
-JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_OsmKeyValueObjectStore_create
+JNIEXPORT jlong JNICALL Java_de_funroll_1loops_oscar_nc_OsmKeyValueObjectStore_create
   (JNIEnv *, jobject);
 
 /*
  * Class:     de_funroll_loops_oscar_nc_OsmKeyValueObjectStore
  * Method:    destroy
- * Signature: (I)V
+ * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_de_funroll_1loops_oscar_nc_OsmKeyValueObjectStore_destroy
-  (JNIEnv *, jobject, jint);
+  (JNIEnv *, jobject, jlong);
 
 /*
  * Class:     de_funroll_loops_oscar_nc_OsmKeyValueObjectStore
  * Method:    numberOfRegions
- * Signature: (I)I
+ * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_OsmKeyValueObjectStore_numberOfRegions
-  (JNIEnv *, jobject, jint);
+  (JNIEnv *, jobject, jlong);
 
 /*
  * Class:     de_funroll_loops_oscar_nc_OsmKeyValueObjectStore
  * Method:    size
- * Signature: (I)I
+ * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_OsmKeyValueObjectStore_size
-  (JNIEnv *, jobject, jint);
+  (JNIEnv *, jobject, jlong);
 
 /*
  * Class:     de_funroll_loops_oscar_nc_OsmKeyValueObjectStore
  * Method:    at
- * Signature: (II)I
+ * Signature: (JI)J
  */
-JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_OsmKeyValueObjectStore_at
-  (JNIEnv *, jobject, jint, jint);
+JNIEXPORT jlong JNICALL Java_de_funroll_1loops_oscar_nc_OsmKeyValueObjectStore_at
+  (JNIEnv *, jobject, jlong, jint);
 
 /*
  * Class:     de_funroll_loops_oscar_nc_OsmKeyValueObjectStore
  * Method:    keyStringTable
- * Signature: (I)I
+ * Signature: (J)J
  */
-JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_OsmKeyValueObjectStore_keyStringTable
-  (JNIEnv *, jobject, jint);
+JNIEXPORT jlong JNICALL Java_de_funroll_1loops_oscar_nc_OsmKeyValueObjectStore_keyStringTable
+  (JNIEnv *, jobject, jlong);
 
 #ifdef __cplusplus
 }

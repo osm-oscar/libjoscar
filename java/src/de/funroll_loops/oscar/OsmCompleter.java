@@ -14,12 +14,12 @@ public class OsmCompleter extends Base<de.funroll_loops.oscar.nc.OsmCompleter> {
 	}
 	
 	public OsmKeyValueObjectStore store() {
-		int sptr = cnc().store( ptr() );
+		long sptr = cnc().store( ptr() );
 		return new OsmKeyValueObjectStore(sptr);
 	}
 	
 	public GeoHierarchySubSet clusteredComplete(String qstr, boolean treedCQR) {
-		int sptr = cnc().clusteredComplete(ptr(), qstr, treedCQR);
+		long sptr = cnc().clusteredComplete(ptr(), qstr, treedCQR);
 		return new GeoHierarchySubSet(sptr);
 	}
 }

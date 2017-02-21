@@ -2,14 +2,14 @@ package de.funroll_loops.oscar.nc;
 
 public class OsmCompleter extends Base implements BaseInterface {
 
-	public native int create();
-	public native void destroy(int ptr);
+	public native long create();
+	public native void destroy(long ptr);
 
-	public native void setFilePrefix(int ptr, String filename);
+	public native void setFilePrefix(long ptr, String filename);
 
-	public native void energize(int ptr);
+	public native void energize(long ptr);
 	
-	public native int store(int ptr);
+	public native long store(long ptr);
 	
-	public native int clusteredComplete(int ptr, String qstr, boolean treedCQR);
+	public native long clusteredComplete(long ptr, String qstr, boolean treedCQR);
 }

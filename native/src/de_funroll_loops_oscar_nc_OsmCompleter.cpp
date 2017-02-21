@@ -15,7 +15,7 @@ namespace {
  * Method:    create
  * Signature: ()I
  */
-JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_OsmCompleter_create
+JNIEXPORT JavaNativeHandle JNICALL Java_de_funroll_1loops_oscar_nc_OsmCompleter_create
   (JNIEnv * env, jobject)
 {
 	try {
@@ -35,7 +35,7 @@ JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_OsmCompleter_create
  * Signature: (I)Z
  */
 JNIEXPORT void JNICALL Java_de_funroll_1loops_oscar_nc_OsmCompleter_destroy
-  (JNIEnv * env, jobject, jint id)
+  (JNIEnv * env, jobject, JavaNativeHandle id)
 {
 	try {
 		objStore.destroy(id);
@@ -51,7 +51,7 @@ JNIEXPORT void JNICALL Java_de_funroll_1loops_oscar_nc_OsmCompleter_destroy
  * Signature: (ILjava/lang/String;)V
  */
 JNIEXPORT void JNICALL Java_de_funroll_1loops_oscar_nc_OsmCompleter_setFilePrefix
-  (JNIEnv * env, jobject, jint id, jstring path)
+  (JNIEnv * env, jobject, JavaNativeHandle id, jstring path)
 {
 	try {
 		objStore.get(id)->setAllFilesFromPrefix( libjoscar::toString(env, path) );
@@ -67,7 +67,7 @@ JNIEXPORT void JNICALL Java_de_funroll_1loops_oscar_nc_OsmCompleter_setFilePrefi
  * Signature: (I)Z
  */
 JNIEXPORT void JNICALL Java_de_funroll_1loops_oscar_nc_OsmCompleter_energize
-  (JNIEnv * env, jobject, jint id)
+  (JNIEnv * env, jobject, JavaNativeHandle id)
 {
 	try {
 		objStore.get(id)->energize();
@@ -82,8 +82,8 @@ JNIEXPORT void JNICALL Java_de_funroll_1loops_oscar_nc_OsmCompleter_energize
  * Method:    store
  * Signature: (I)I
  */
-JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_OsmCompleter_store
-  (JNIEnv * env, jobject, jint id)
+JNIEXPORT JavaNativeHandle JNICALL Java_de_funroll_1loops_oscar_nc_OsmCompleter_store
+  (JNIEnv * env, jobject, JavaNativeHandle id)
 {
 	try {
 		return libjoscar::createStore(objStore.get(id)->store());
@@ -99,8 +99,8 @@ JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_OsmCompleter_store
  * Method:    clusteredComplete
  * Signature: (Ljava/lang/String;Z)I
  */
-JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_OsmCompleter_clusteredComplete
-  (JNIEnv * env, jobject, jint id, jstring qjstr, jboolean treedCQR)
+JNIEXPORT JavaNativeHandle JNICALL Java_de_funroll_1loops_oscar_nc_OsmCompleter_clusteredComplete
+  (JNIEnv * env, jobject, JavaNativeHandle id, jstring qjstr, jboolean treedCQR)
 {
 	try {
 		std::string qstr( libjoscar::toString(env, qjstr) );

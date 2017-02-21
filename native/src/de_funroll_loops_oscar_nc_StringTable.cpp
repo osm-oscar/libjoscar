@@ -10,7 +10,7 @@ namespace {
 
 namespace libjoscar {
 
-int createStringTable(const sserialize::Static::StringTable & v) {
+JavaNativeHandle createStringTable(const sserialize::Static::StringTable & v) {
 	return objStore.insert(new sserialize::Static::StringTable(v) );
 }
 
@@ -21,7 +21,7 @@ int createStringTable(const sserialize::Static::StringTable & v) {
  * Method:    create
  * Signature: ()I
  */
-JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_StringTable_create
+JNIEXPORT JavaNativeHandle JNICALL Java_de_funroll_1loops_oscar_nc_StringTable_create
   (JNIEnv * env, jobject)
 {
 	try {
@@ -39,7 +39,7 @@ JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_StringTable_create
  * Signature: (I)V
  */
 JNIEXPORT void JNICALL Java_de_funroll_1loops_oscar_nc_StringTable_destroy
-  (JNIEnv * env, jobject, jint id)
+  (JNIEnv * env, jobject, JavaNativeHandle id)
 {
 	try {
 		return objStore.destroy(id);
@@ -55,7 +55,7 @@ JNIEXPORT void JNICALL Java_de_funroll_1loops_oscar_nc_StringTable_destroy
  * Signature: (I)I
  */
 JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_StringTable_size
-  (JNIEnv * env, jobject, jint id)
+  (JNIEnv * env, jobject, JavaNativeHandle id)
 {
 	try {
 		return objStore.get(id)->size();
@@ -72,7 +72,7 @@ JNIEXPORT jint JNICALL Java_de_funroll_1loops_oscar_nc_StringTable_size
  * Signature: (II)Ljava/lang/String;
  */
 JNIEXPORT jstring JNICALL Java_de_funroll_1loops_oscar_nc_StringTable_at
-  (JNIEnv * env, jobject, jint id, jint pos)
+  (JNIEnv * env, jobject, JavaNativeHandle id, jint pos)
 {
 	try {
 		return libjoscar::toJString(env, objStore.get(id)->at(pos));

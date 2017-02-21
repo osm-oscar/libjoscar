@@ -2,7 +2,7 @@ package de.funroll_loops.oscar;
 
 public class GeoHierarchySubSet extends Base<de.funroll_loops.oscar.nc.GeoHierarchySubSet> {
 
-	public GeoHierarchySubSet(int _ptr) {
+	public GeoHierarchySubSet(long _ptr) {
 		super(new de.funroll_loops.oscar.nc.GeoHierarchySubSet(), _ptr);
 	}
 	

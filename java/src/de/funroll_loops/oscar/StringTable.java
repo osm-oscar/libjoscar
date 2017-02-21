@@ -4,7 +4,7 @@ public class StringTable extends Base<de.funroll_loops.oscar.nc.StringTable> {
 	public StringTable() {
 	}
 
-	public StringTable(int _ptr) {
+	public StringTable(long _ptr) {
 		super(new de.funroll_loops.oscar.nc.StringTable(), _ptr);
 	}
 	
