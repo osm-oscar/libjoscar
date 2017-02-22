@@ -3,8 +3,8 @@ package de.funroll_loops.oscar;
 import de.funroll_loops.oscar.nc.BaseInterface;
 
 class Base<T_NATIVE_COMMUNICATOR extends de.funroll_loops.oscar.nc.BaseInterface> {
-	protected T_NATIVE_COMMUNICATOR m_nc;
-	protected long m_ptr;
+	private T_NATIVE_COMMUNICATOR m_nc;
+	private long m_ptr;
 	
 	protected T_NATIVE_COMMUNICATOR nc() {
 		return m_nc;
