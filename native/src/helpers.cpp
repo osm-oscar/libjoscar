@@ -14,6 +14,12 @@ jstring toJString(JNIEnv* env, const std::string& str) {
 	return env->NewStringUTF( str.c_str() );
 }
 
+jbyteArray toByteArray(JNIEnv * env, const std::string & str) {
+	jbyteArray bytes = env->NewByteArray(str.size());
+	env->SetByteArrayRegion(bytes, 0, str.size(), (jbyte*) str.c_str());
+    return bytes;
+}
+
 jintArray toJIntArray(JNIEnv * env, const sserialize::ItemIndex& idx) {
 	std::vector<uint32_t> tmp;
 	tmp.reserve(idx.size());
