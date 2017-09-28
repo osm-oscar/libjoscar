@@ -11,4 +11,6 @@ public class OsmKeyValueObjectStore extends Base implements BaseInterface {
 	public native long at(long ptr, int pos);
 	
 	public native long keyStringTable(long ptr);
+
+	public native void bench(long ptr);
 }
