@@ -1,26 +1,15 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.9)
 project(joscar)
-
-set(MY_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra -Wno-unknown-pragmas -Wstrict-overflow=4")
-set(MY_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wno-unknown-pragmas -Wstrict-overflow=4")
-
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${MY_C_FLAGS}")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${MY_CXX_FLAGS}")
-set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} ${DEBUG_FLAGS}")
-set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} ${DEBUG_FLAGS}")
-set(CMAKE_C_FLAGS_RELWITHDEBINFO "${CMAKE_C_FLAGS_RELWITHDEBINFO} ${DEBUG_FLAGS}")
-set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "${CMAKE_CXX_FLAGS_RELWITHDEBINFO} ${DEBUG_FLAGS}")
 
 find_package(JNI REQUIRED)
 add_subdirectory(vendor/liboscar liboscar)
 
-include_directories(
+set(MY_INCLUDE_DIRS
 	${JNI_INCLUDE_DIRS}
-	${LIBOSCAR_INCLUDE_DIR}
 )
 
-SET(JOSCAR_LINK_LIBS
-	${LIBOSCAR_LINK_LIBRARIES}
+set(MY_LINK_LIBS
+	liboscar
 )
 
 set(JOSCAR_SOURCES_CPP
@@ -35,5 +24,5 @@ set(JOSCAR_SOURCES_CPP
 )
 
 add_library(${PROJECT_NAME} SHARED ${JOSCAR_SOURCES_CPP})
-target_link_libraries(${PROJECT_NAME} ${JOSCAR_LINK_LIBS})
-add_dependencies(${PROJECT_NAME} liboscar)
+target_link_libraries(${PROJECT_NAME} PUBLIC ${MY_LINK_LIBS})
+target_include_directories(${PROJECT_NAME} PUBLIC ${MY_INCLUDE_DIRS})
